@@ -1,0 +1,51 @@
+BruteForce(G, n)
+	// Powerset Operation
+	powerset = {()}// The empty set [[]]
+	for every edge in G.edges
+		create new_subsets ()
+		for every subset in powerset
+			create a copy of subset called new_subset ()
+			add edge to new_subset ()
+			// To create a new unique powerset
+			add new_subset to new_subsets ()
+
+		add new_subsets to powerset {}
+		
+	
+	create optimal_subset = ()
+	make optimal_weight = -math.infinity
+
+	for every subset in powerset
+		create a graph copy G called temp_graph
+		// remove the edges and then calculate the weight as well
+		total_weight = 0
+		for every edge in subset // subset can have multiple edges
+			total_weight = total_weight + edge.weight
+			remove edge from temp_graph
+
+		count = Subgraphs_DPS(temp_graph)
+
+		if count == n and count > 1 and total_weight > optimal_weight then
+		// if count != n move on to find the next iteration of edges
+			optimal_weight = total_weight
+			optimal_subset = subset
+
+		// Remove minimal edges and leave n unconnected graph
+	minimal_weight = 0
+	for every edge in optimal_subset
+		minimal_weight = minimal_weight + edge.weight
+		remove edge from graph G
+	Accept state with minimal_weight
+
+Subgraphs_DPS(G)
+	//Assume the DFS Has been implemented for the moment
+	counter = 0
+	for every vertex in G.vertices
+		make all visit states of graph G's vertices to = False
+
+	for every vertex in G.vertices
+		if vertex.visited != True
+			counter += 1
+			DFS(vertex)
+	return counter
+	
